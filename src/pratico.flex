@@ -28,8 +28,7 @@
     pstats = fopen("ProbsStatistics.txt","w");
     q = fopen("quotes.txt","w");
     p = fopen("probs.txt","w");
-    int altsAdults[2] ={0};
-    int mode = 0;
+    int adults = 0;
 
 \<page\>                    {
                                 BEGIN(PAGE);
@@ -60,8 +59,7 @@
                         fprintf(p,"\nPROVERBIOS :%s -----------\n",title);
                         BEGIN(PROBPAGE);
                         proverbio=1;
-                        altsAdults[0] = 0;
-                        altsAdults[1] = 0;
+                        adults = 0;
                     }
                     else{
                         BEGIN(QUOTEPAGE);
@@ -126,45 +124,39 @@ Nome\ *=\ *    {
                             probs++;
                             BEGIN(PROVERBIO);
 }
+.*(Adulterados|Adulteração):.*\n   {
+        BEGIN(PROBOPTIONALS);
+        fprintf(p,"\nAdulteraçoes:\n\t\t");
+}
+\**\  {}
 \<\/page\> {
             BEGIN(0);
             if(probs || quotes){
                     fprintf(pstats,"Article:\"%s\"\n",title);
                     if(probs)
                         fprintf(pstats,"\tnº probs:%d\n",probs);
-                    if(altsAdults[0] || altsAdults[1])
-                        fprintf(pstats,"\tAlternativas %d, Adulteraçoes %d\n",altsAdults[0],altsAdults[1]);
+                    if(adults)
+                        fprintf(pstats,"\tAdulteraçoes %d\n",adults);
             }
 }
 }
     
 <PROVERBIO>{
 \n {BEGIN(PROBPAGE);}
-.*'*Alternativos:.*\n  {
-        BEGIN(PROBOPTIONALS);
-        fprintf(p,"\nAlternativos\n\t\t");
-        mode = 0;
-    }
-.*'*(Adulterados|Adulteração):.*\n   {
-        BEGIN(PROBOPTIONALS);
-        fprintf(p,"\nAdulteraçoes:\n\t\t");
-        mode = 1;
-    }
-&lt;u&gt; {}
-&lt;\/u&gt; {}
-'' {}
-&quot; {}
+(&lt;u&gt;|&lt;\/u&gt;|''|&quot;) {}
 . {
     if(proverbio)
         fprintf(p,"%s",yytext);
     }
 }
 
+
 <PROBOPTIONALS>{
-\n/\*\  {BEGIN(PROBPAGE);}
-\*\* {BEGIN(PROBPAGE);}
+./\n(\*|\*\*)\  {fprintf(p,"%s",yytext);
+          BEGIN(PROBPAGE);
+         }
 \n {fprintf(p,"\n\t\t");}
-\*\*\* {altsAdults[mode]++;}
+\*\*\* {adults++;}
 (\[|\]|&quot;|\*) {}
 . {fprintf(p,"%s",yytext);}
 }
