@@ -50,6 +50,7 @@
 
 
 <TITLE>{
+(\[|\])  {}
 .               {
                     title[titleidx++] = yytext[0];
                 }
@@ -67,7 +68,8 @@
                 }
 }
 
-<AUTOR>{                                                              
+<AUTOR>{
+(\[|\])  {}                                                              
 \n                   {
                                 BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
@@ -113,7 +115,7 @@ Nome\ *=\ *    {
                                 }
                                 quotes++;
                             }
-.|\n                 {
+.                 {
                                     fprintf(q, "%s", yytext);
                      }
 }
