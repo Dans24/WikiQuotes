@@ -2,6 +2,10 @@
     #include<stdio.h>
     #define BUFFER_LENGTH   2048
     FILE * f;
+    char title[BUFFER_LENGTH];
+    int titleidx = 0;
+    int probs;
+    int quotes;
     char autor[BUFFER_LENGTH];
     int autorIndex = 0;
     int proverbio = 0;
@@ -13,21 +17,33 @@
 
 %x PAGE QUOTE LINK AUTOR PROVERBIO
 %%
+
+    FILE * stats = fopen("Statistics.txt","w");
     f = stdout;
 \<page\>                    {
                                 BEGIN(PAGE);
-                                autor[0] = 0;    
+                                autor[0] = 0;
+                                title[0] = 0;
+                                probs = 0;
+                                quotes = 0;
                             }
 
 <PAGE>{
-\<\/page\>            {BEGIN(0);}
+\<\/page\>              {
+                            BEGIN(0);
+                            fprintf(stats,"Article:\"%s\" \n\tnº quotes:%d \n\tnº probs:%d \n",title,quotes,probs);
+                            probs = 0;
+                            quotes = 0;
+                            titleidx = 0;
+                        }
 \*\ *(&quot;|“|«)\ *    {
                             BEGIN(QUOTE);
                             if(!(proverbioOption && !proverbio)) {
                                 fprintf(f,"“");
                             }
                         }
-\<title\>Provérbios     {
+\<title\>       {   
+                            titleidx = 0;
                             BEGIN(PROVERBIO);
                             proverbio = 1;
                         }
@@ -37,7 +53,15 @@ Nome\ *=\ *    {
                 }
 }
 
-<PROVERBIO>\<\/title\>      {BEGIN(PAGE);}
+<PROVERBIO>{
+.               {
+                    title[titleidx++] = yytext[0];
+                }
+\<\/title\>     {
+                    BEGIN(PAGE);
+                    title[titleidx]='\0';
+                }
+}
 
 <AUTOR>{                                                              
 \n                   {
@@ -60,6 +84,10 @@ Nome\ *=\ *    {
                                     } else {
                                         fprintf(f, "”\n");
                                     }
+                                    if(proverbio)
+                                        probs++;    
+                                    else
+                                       quotes++;
                                 }
                             }
 .|\n                 {
