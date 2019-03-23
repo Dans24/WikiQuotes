@@ -84,7 +84,7 @@ Nome\ *=\ *    {
                                     } else {
                                         fprintf(f, "”\n");
                                     }
-                                    if(proverbio)
+                                    if(!strcmp(yytext,"&quot;"))
                                         probs++;    
                                     else
                                        quotes++;
