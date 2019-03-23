@@ -11,72 +11,67 @@
     int autorIndex = 0;
     int proverbio = 0;
     int proverbioOption = 0;
+    FILE * p;
+    FILE * q;
+    FILE * qstats;
+    FILE * pstats;
 %}
 %option main
 %option yylineno
 %option noyywrap
 
-%x PAGE QUOTE LINK AUTOR PROVERBIO
+%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS
 %%
-
-    FILE * stats = fopen("Statistics.txt","w");
+      
     f = stdout;
+    qstats = fopen("QuoteStatistics.txt","w");
+    pstats = fopen("ProbsStatistics.txt","w");
+    q = fopen("quotes.txt","w");
+    p = fopen("probs.txt","w");
+    int altsAdults[2] ={0};
+    int mode = 0;
+
 \<page\>                    {
                                 BEGIN(PAGE);
                                 autor[0] = 0;
                                 title[0] = 0;
                                 probs = 0;
                                 quotes = 0;
+                                proverbio = 0;
                             }
 
 <PAGE>{
-\<\/page\>              {
-                            BEGIN(0);
-                            if(probs || quotes){
-                                fprintf(stats,"Article:\"%s\"\n",title);
-                                if(autor[0])
-                                    fprintf(stats,"\tAuthor: %s\n",autor);
-                                if(probs)
-                                    fprintf(stats,"\tnº probs:%d\n",probs);
-                                if(quotes)
-                                    fprintf(stats,"\tnº quotes:%d\n",quotes);
-                            }
-                            probs = 0;
-                            quotes = 0;
-                            titleidx = 0;
-                            proverbio = 0;
-                        }
-\*\ *(&quot;|“|«)\ *    {
-                            BEGIN(QUOTE);
-                            if(!(proverbioOption && !proverbio)) {
-                                fprintf(f,"“");
-                            }
-                        }
 \<title\>       {   
+                            title[0] = 0;
                             titleidx = 0;
-                            BEGIN(PROVERBIO);
+                            BEGIN(TITLE);
                         }
-Nome\ *=\ *    {
-                    BEGIN(AUTOR);
-                    autorIndex = 0;
-                }
+
 }
 
-<PROVERBIO>{
+
+<TITLE>{
 .               {
                     title[titleidx++] = yytext[0];
                 }
 \<\/title\>     {
-                    BEGIN(PAGE);
                     title[titleidx]='\0';
-                    if(!strncmp("Provérbios", title, strlen("Provérbios")))
-                        proverbio = 1;
+                    if(!strncmp("Provérbios", title, strlen("Provérbios"))){
+                        fprintf(p,"\nPROVERBIOS :%s -----------\n",title);
+                        BEGIN(PROBPAGE);
+                        proverbio=1;
+                        altsAdults[0] = 0;
+                        altsAdults[1] = 0;
+                    }
+                    else{
+                        BEGIN(QUOTEPAGE);
+                    }
                 }
 }
 
 <AUTOR>{                                                              
 \n                   {
-                                BEGIN(PAGE);
+                                BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
                             }
 .                    {
@@ -84,40 +79,96 @@ Nome\ *=\ *    {
                             }
 }
 
+<QUOTEPAGE>{
+Nome\ *=\ *    {
+                    BEGIN(AUTOR);
+                    autorIndex = 0;
+                }
+
+\*\ *(&quot;|“|«)\ *    {
+                            BEGIN(QUOTE);
+                            if(!(proverbioOption && !proverbio)) {
+                                fprintf(f,"“");
+                            }
+                        }
+\<\/page\> {
+                BEGIN(0);
+                if(probs || quotes){
+                    fprintf(qstats,"Article:\"%s\"\n",title);
+                    if(autor[0])
+                        fprintf(qstats,"\tAuthor: %s\n",autor);
+                    if(quotes)
+                        fprintf(qstats,"\tnº quotes:%d\n",quotes);
+                }
+            }
+}
 
 <QUOTE>{
-\[\[                 {BEGIN(LINK);}
+\[\[ {}
+\]\] {}
 (&quot;|”|\n|»)      {
-                                BEGIN(PAGE);
-                                if(!(proverbioOption && !proverbio)) {
-                                    if(autor[0]) {
-                                        fprintf(f, "” - %s\n", autor);
-                                    } else {
-                                        fprintf(f, "”\n");
-                                    }
-                                    if(proverbio)
-                                        probs++;    
-                                    else
-                                       quotes++;
+                                BEGIN(QUOTEPAGE);
+                                if(autor[0]) {
+                                    fprintf(f, "” - %s\n", autor);
+                                } else {
+                                    fprintf(f, "”\n");
                                 }
+                                quotes++;
                             }
 .|\n                 {
-                                if(!(proverbioOption && !proverbio)) {
                                     fprintf(f, "%s", yytext);
-                                }
-                            }
+                     }
 }
 
-
-<LINK>{
-\|.*\]\]              {BEGIN(QUOTE);}
-.|\n                  {
-                                if(!(proverbioOption && !proverbio)) {
-                                    fprintf(f, "%s", yytext);
-                                }
-                            }
-\]\]                  {BEGIN(QUOTE);}
+     
+<PROBPAGE>{
+\*\        {
+                            probs++;
+                            BEGIN(PROVERBIO);
+    }
+\<\/page\> {
+            BEGIN(0);
+            if(probs || quotes){
+                    fprintf(pstats,"Article:\"%s\"\n",title);
+                    if(probs)
+                        fprintf(pstats,"\tnº probs:%d\n",probs);
+                    if(altsAdults[0] || altsAdults[1])
+                        fprintf(pstats,"\tAlternativas %d, Adulteraçoes %d\n",altsAdults[0],altsAdults[1]);
+            }
 }
+}
+    
+<PROVERBIO>{
+\n {BEGIN(PROBPAGE);}
+.*'*Alternativos:.*\n  {
+        BEGIN(PROBOPTIONALS);
+        fprintf(p,"\nAlternativos\n\t\t");
+        mode = 0;
+    }
+.*'*(Adulterados|Adulteração):.*\n   {
+        BEGIN(PROBOPTIONALS);
+        fprintf(p,"\nAdulteraçoes:\n\t\t");
+        mode = 1;
+    }
+&lt;u&gt; {}
+&lt;\/u&gt; {}
+'' {}
+&quot; {}
+. {
+    if(proverbio)
+        fprintf(p,"%s",yytext);
+    }
+}
+
+<PROBOPTIONALS>{
+\n/\*\  {BEGIN(PROBPAGE);}
+\*\* {BEGIN(PROBPAGE);}
+\n {fprintf(p,"\n\t\t");}
+(\[|\]|&quot;) {}
+\*\*\* {altsAdults[mode]++;}
+. {fprintf(p,"%s",yytext);}
+}
+
 
 <*>.|\n {}
 %%
