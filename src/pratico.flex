@@ -31,7 +31,15 @@
 <PAGE>{
 \<\/page\>              {
                             BEGIN(0);
-                            fprintf(stats,"Article:\"%s\" \n\tnº quotes:%d \n\tnº probs:%d \n",title,quotes,probs);
+                            if(probs || quotes){
+                                fprintf(stats,"Article:\"%s\"\n",title);
+                                if(autor[0])
+                                    fprintf(stats,"\tAuthor: %s\n",autor);
+                                if(probs)
+                                    fprintf(stats,"\tnº probs:%d\n",probs);
+                                if(quotes)
+                                    fprintf(stats,"\tnº quotes:%d\n",quotes);
+                            }
                             probs = 0;
                             quotes = 0;
                             titleidx = 0;
