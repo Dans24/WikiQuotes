@@ -1,5 +1,6 @@
 %{
     #include<stdio.h>
+    #include<string.h>
     #define BUFFER_LENGTH   2048
     FILE * f;
     char title[BUFFER_LENGTH];
@@ -43,6 +44,7 @@
                             probs = 0;
                             quotes = 0;
                             titleidx = 0;
+                            proverbio = 0;
                         }
 \*\ *(&quot;|“|«)\ *    {
                             BEGIN(QUOTE);
@@ -53,7 +55,6 @@
 \<title\>       {   
                             titleidx = 0;
                             BEGIN(PROVERBIO);
-                            proverbio = 1;
                         }
 Nome\ *=\ *    {
                     BEGIN(AUTOR);
@@ -68,6 +69,8 @@ Nome\ *=\ *    {
 \<\/title\>     {
                     BEGIN(PAGE);
                     title[titleidx]='\0';
+                    if(!strncmp("Provérbios", title, strlen("Provérbios")))
+                        proverbio = 1;
                 }
 }
 
@@ -92,7 +95,7 @@ Nome\ *=\ *    {
                                     } else {
                                         fprintf(f, "”\n");
                                     }
-                                    if(!strcmp(yytext,"&quot;"))
+                                    if(proverbio)
                                         probs++;    
                                     else
                                        quotes++;
