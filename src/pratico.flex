@@ -143,7 +143,7 @@ Nome\ *=\ *    {
     
 <PROVERBIO>{
 \n {BEGIN(PROBPAGE);}
-(&lt;u&gt;|&lt;\/u&gt;|''|&quot;) {}
+(&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]) {}
 . {
     if(proverbio)
         fprintf(p,"%s",yytext);
