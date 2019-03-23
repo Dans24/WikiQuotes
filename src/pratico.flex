@@ -88,7 +88,7 @@ Nome\ *=\ *    {
 \*\ *(&quot;|“|«)\ *    {
                             BEGIN(QUOTE);
                             if(!(proverbioOption && !proverbio)) {
-                                fprintf(f,"“");
+                                fprintf(q,"“");
                             }
                         }
 \<\/page\> {
@@ -109,14 +109,14 @@ Nome\ *=\ *    {
 (&quot;|”|\n|»)      {
                                 BEGIN(QUOTEPAGE);
                                 if(autor[0]) {
-                                    fprintf(f, "” - %s\n", autor);
+                                    fprintf(q, "” - %s\n", autor);
                                 } else {
-                                    fprintf(f, "”\n");
+                                    fprintf(q, "”\n");
                                 }
                                 quotes++;
                             }
 .|\n                 {
-                                    fprintf(f, "%s", yytext);
+                                    fprintf(q, "%s", yytext);
                      }
 }
 
@@ -125,7 +125,7 @@ Nome\ *=\ *    {
 \*\        {
                             probs++;
                             BEGIN(PROVERBIO);
-    }
+}
 \<\/page\> {
             BEGIN(0);
             if(probs || quotes){
@@ -164,8 +164,8 @@ Nome\ *=\ *    {
 \n/\*\  {BEGIN(PROBPAGE);}
 \*\* {BEGIN(PROBPAGE);}
 \n {fprintf(p,"\n\t\t");}
-(\[|\]|&quot;) {}
 \*\*\* {altsAdults[mode]++;}
+(\[|\]|&quot;|\*) {}
 . {fprintf(p,"%s",yytext);}
 }
 
