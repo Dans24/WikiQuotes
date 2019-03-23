@@ -18,31 +18,41 @@
                                 BEGIN(PAGE);
                                 autor[0] = 0;    
                             }
-<PAGE>\<\/page\>            {BEGIN(0);}
-<PAGE>\*\ *(&quot;|“|«)\ *    {
-                                BEGIN(QUOTE);
-                                if(!(proverbioOption && !proverbio)) {
-                                    fprintf(f,"“");
-                                }
+
+<PAGE>{
+\<\/page\>            {BEGIN(0);}
+\*\ *(&quot;|“|«)\ *    {
+                            BEGIN(QUOTE);
+                            if(!(proverbioOption && !proverbio)) {
+                                fprintf(f,"“");
                             }
-<PAGE>\<title\>Provérbios   {
-                                BEGIN(PROVERBIO);
-                                proverbio = 1;
-                            }
+                        }
+\<title\>Provérbios     {
+                            BEGIN(PROVERBIO);
+                            proverbio = 1;
+                        }
+Nome\ *=\ *    {
+                    BEGIN(AUTOR);
+                    autorIndex = 0;
+                }
+}
+
 <PROVERBIO>\<\/title\>      {BEGIN(PAGE);}
-<PAGE><text\ +xml:space=\"preserve\"\>\{\{Autor\n\ *\|\ *Nome\ *=\ *    {
-                                                                            BEGIN(AUTOR);
-                                                                            autorIndex = 0;
-                                                                        }
-<AUTOR>\n                   {
+
+<AUTOR>{                                                              
+\n                   {
                                 BEGIN(PAGE);
                                 autor[autorIndex] = 0;
                             }
-<AUTOR>.                    {
+.                    {
                                 autor[autorIndex++] = yytext[0];
                             }
-<QUOTE>\[\[                 {BEGIN(LINK);}
-<QUOTE>(&quot;|”|\n|»)      {
+}
+
+
+<QUOTE>{
+\[\[                 {BEGIN(LINK);}
+(&quot;|”|\n|»)      {
                                 BEGIN(PAGE);
                                 if(!(proverbioOption && !proverbio)) {
                                     if(autor[0]) {
@@ -52,18 +62,23 @@
                                     }
                                 }
                             }
-<QUOTE>.|\n                 {
+.|\n                 {
                                 if(!(proverbioOption && !proverbio)) {
                                     fprintf(f, "%s", yytext);
                                 }
                             }
-<LINK>\|.*\]\]              {BEGIN(QUOTE);}
-<LINK>.|\n                  {
+}
+
+
+<LINK>{
+\|.*\]\]              {BEGIN(QUOTE);}
+.|\n                  {
                                 if(!(proverbioOption && !proverbio)) {
                                     fprintf(f, "%s", yytext);
                                 }
                             }
-<LINK>\]\]                  {BEGIN(QUOTE);}
+\]\]                  {BEGIN(QUOTE);}
+}
 
 <*>.|\n {}
 %%
