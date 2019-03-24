@@ -71,7 +71,7 @@
 
 <AUTOR>{
 (\[|\])  {}                                                              
-\n                   {
+(\n|\|)                   {
                                 BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
                             }
@@ -104,8 +104,8 @@ Nome\ *=\s*    {
 }
 
 <QUOTE>{
-\[\[ {}
-\]\] {}
+\[ {}
+\] {}
 (&quot;|”|\n|»)      {
                                 BEGIN(QUOTEPAGE);
                                 if(autor[0]) {
@@ -115,6 +115,7 @@ Nome\ *=\s*    {
                                 }
                                 quotes++;
                             }
+                            
 .                 {
                                     fprintf(q, "%s", yytext);
                      }
