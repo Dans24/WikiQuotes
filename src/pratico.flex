@@ -33,7 +33,9 @@
 \<page\>                    {
                                 BEGIN(PAGE);
                                 autor[0] = 0;
+                                autorIndex = 0;
                                 title[0] = 0;
+                                titleidx = 0;
                                 probs = 0;
                                 quotes = 0;
                                 proverbio = 0;
@@ -41,11 +43,10 @@
 
 <PAGE>{
 \<title\>       {   
-                            title[0] = 0;
-                            titleidx = 0;
+                            
                             BEGIN(TITLE);
                         }
-
+\<\/page\> {BEGIN(0);}
 }
 
 
@@ -80,9 +81,8 @@
 }
 
 <QUOTEPAGE>{
-Nome\ *=\ *    {
+Nome\ *=\s*    {
                     BEGIN(AUTOR);
-                    autorIndex = 0;
                 }
 
 \*\ *(&quot;|“|«)\ *    {
