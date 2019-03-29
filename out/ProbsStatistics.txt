@@ -1,0 +1,73 @@
+Article:"Provérbios em Português"
+	nº probs:1391
+	Adulteraçoes 122
+Article:"Provérbios galegos"
+	nº probs:34
+Article:"Provérbios turcos"
+	nº probs:6
+Article:"Provérbios búlgaros"
+	nº probs:14
+Article:"Provérbios cipriotas"
+	nº probs:4
+Article:"Provérbios chineses"
+	nº probs:31
+Article:"Provérbios judaicos"
+	nº probs:40
+Article:"Provérbios holandeses"
+	nº probs:65
+Article:"Provérbios córsicos"
+	nº probs:3
+Article:"Provérbios poloneses"
+	nº probs:5
+Article:"Provérbios gregos"
+	nº probs:4
+Article:"Provérbios alemães"
+	nº probs:68
+Article:"Provérbios russos"
+	nº probs:137
+Article:"Provérbios latinos"
+	nº probs:8
+Article:"Provérbios italianos"
+	nº probs:72
+Article:"Provérbios espanhóis"
+	nº probs:74
+Article:"Provérbios árabes"
+	nº probs:481
+Article:"Provérbios dinamarqueses"
+	nº probs:19
+Article:"Provérbios africanos"
+	nº probs:39
+Article:"Provérbios curdos"
+	nº probs:2
+Article:"Provérbios ingleses"
+	nº probs:8
+Article:"Provérbios hindus"
+	nº probs:2
+Article:"Provérbios franceses"
+	nº probs:3
+Article:"Provérbios orientais"
+	nº probs:4
+Article:"Provérbios japoneses"
+	nº probs:75
+Article:"Provérbios em Talian"
+	nº probs:178
+Article:"Provérbios iugoslavos"
+	nº probs:2
+Article:"Provérbios brasileiros"
+	nº probs:93
+Article:"Provérbios irlandeses"
+	nº probs:6
+Article:"Provérbios venezuelanos"
+	nº probs:7
+Article:"Provérbios indianos"
+	nº probs:1
+Article:"Provérbios israelenses"
+	nº probs:12
+Article:"Provérbios friulanos"
+	nº probs:1
+Article:"Provérbios suíços"
+	nº probs:1
+Article:"Provérbios romenos"
+	nº probs:1
+Article:"Provérbios tunisianos"
+	nº probs:1

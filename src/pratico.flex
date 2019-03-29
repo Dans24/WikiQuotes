@@ -20,6 +20,8 @@
 %option yylineno
 %option noyywrap
 
+S   [\ \t]
+
 %x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS LINK
 %%
       
@@ -85,13 +87,13 @@
 }
 
 <QUOTEPAGE>{
-Nome\s*=\s*    {
+Nome{S}*={S}s*    {
                     BEGIN(AUTOR);
                 }
 
-Wikipedia\s*=\s* { if(!autorIndex) BEGIN(AUTOR); }
+Wikipedia{S}*={S}* { if(!autorIndex) BEGIN(AUTOR); }
 
-\*\ *(&quot;|“|«)\ *    {
+\*{S}*(&quot;|“('')?|«){S}*    {
                             BEGIN(QUOTE);
                             if(!(proverbioOption && !proverbio)) {
                                 fprintf(q,"“");
@@ -123,9 +125,12 @@ Wikipedia\s*=\s* { if(!autorIndex) BEGIN(AUTOR); }
                             }
                             
 .                   {
-                                    fprintf(q, "%s", yytext);
-                     }
-(\[\[[^\|(\[\[)]*\|)|\[\[          { BEGIN(LINK);}
+                        fprintf(q, "%s", yytext);
+                    }
+'''                 {
+                        fprintf(q, "\"");
+                    }
+\[\[               { BEGIN(LINK); }
 }
 
 <LINK>{
@@ -135,6 +140,7 @@ Wikipedia\s*=\s* { if(!autorIndex) BEGIN(AUTOR); }
 .                   {
                         fprintf(q, "%s", yytext);
                     }
+[^\|(\]\])]*\|      {}
 }
 
      
