@@ -20,7 +20,7 @@
 %option yylineno
 %option noyywrap
 
-%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS
+%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS LINK
 %%
       
     f = stdout;
@@ -71,19 +71,25 @@
 
 <AUTOR>{
 (\[|\])  {}                                                              
-(\n|\|)                   {
+(\n|\|)                     {
                                 BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
+                                autorIndex = 0;
                             }
-.                    {
+'''                         {
+                                autor[autorIndex++] = '\"';
+}                            
+.                           {
                                 autor[autorIndex++] = yytext[0];
                             }
 }
 
 <QUOTEPAGE>{
-Nome\ *=\s*    {
+Nome\s*=\s*    {
                     BEGIN(AUTOR);
                 }
+
+Wikipedia\s*=\s* { if(!autorIndex) BEGIN(AUTOR); }
 
 \*\ *(&quot;|“|«)\ *    {
                             BEGIN(QUOTE);
@@ -116,9 +122,19 @@ Nome\ *=\s*    {
                                 quotes++;
                             }
                             
-.                 {
+.                   {
                                     fprintf(q, "%s", yytext);
                      }
+(\[\[[^\|(\[\[)]*\|)|\[\[          { BEGIN(LINK);}
+}
+
+<LINK>{
+\]\]                {
+                        BEGIN(QUOTE);
+                    }
+.                   {
+                        fprintf(q, "%s", yytext);
+                    }
 }
 
      
