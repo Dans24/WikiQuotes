@@ -200,7 +200,7 @@ br&gt {}
                                     wordsize = 0;
                                 }
         }
-(&lt|&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]) {}
+(&lt|&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]|\(.*\)) {}
 (\r|\ |\.|\,|\:|\“|\;|\!|\?)                  {
                         if (wordsize>1){
                             word[wordsize]=0;
@@ -223,7 +223,7 @@ br&gt {}
          }
 \n {fprintf(p,"\n\t\t");}
 \*\*\* {adults++;}
-(\[|\]|&quot;|\*) {}
+(\[|\]|&quot;|\*|\(.*\)) {}
 . {fprintf(p,"%s",yytext);}
 }
 
