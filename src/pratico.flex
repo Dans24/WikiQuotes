@@ -24,7 +24,9 @@
 %option yylineno
 %option noyywrap
 
-%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS
+S   [\ \t]
+
+%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS LINK
 %%
     words = g_hash_table_new_full (g_str_hash, g_str_equal,g_free,NULL);
     f = stdout;
@@ -77,21 +79,27 @@
 
 <AUTOR>{
 (\[|\])  {}                                                              
-(\n|\|)                   {
+(\n|\|)                     {
                                 BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
+                                autorIndex = 0;
                             }
-.                    {
+'''                         {
+                                autor[autorIndex++] = '\"';
+}                            
+.                           {
                                 autor[autorIndex++] = yytext[0];
                             }
 }
 
 <QUOTEPAGE>{
-Nome\ *=\s*    {
+Nome{S}*={S}s*    {
                     BEGIN(AUTOR);
                 }
 
-\*\ *(&quot;|“|«)\ *    {
+Wikipedia{S}*={S}* { if(!autorIndex) BEGIN(AUTOR); }
+
+\*{S}*(&quot;|“('')?|«){S}*    {
                             BEGIN(QUOTE);
                             if(!(proverbioOption && !proverbio)) {
                                 fprintf(q,"“");
@@ -144,6 +152,20 @@ br&gt {}
                             word[wordsize++] = yytext[0]; 
                         fprintf(q, "%s", yytext);
                      }
+'''                 {
+                        fprintf(q, "\"");
+                    }
+\[\[               { BEGIN(LINK); }
+}
+
+<LINK>{
+\]\]                {
+                        BEGIN(QUOTE);
+                    }
+.                   {
+                        fprintf(q, "%s", yytext);
+                    }
+[^\|(\]\])]*\|      {}
 }
 
      
