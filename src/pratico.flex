@@ -66,7 +66,7 @@ S   [\ \t]
 \<\/title\>     {
                     title[titleidx]='\0';
                     if(!strncmp("Provérbios", title, strlen("Provérbios"))){
-                        fprintf(p,"\nPROVERBIOS :%s -----------\n",title);
+                        fprintf(p,"PROVERBIOS :%s: \n\n",title);
                         BEGIN(PROBPAGE);
                         proverbio=1;
                         adults = 0;
@@ -207,7 +207,7 @@ br&gt {}
                             addword(word);
                             wordsize = 0;
                         }
-                        fprintf(q, "%s", yytext);
+                        fprintf(p, "%s", yytext);
                     }
 . {
     if(yytext[0]!='\n')
@@ -262,7 +262,7 @@ void goThrough(FILE* w){
         }
     }
     if (num!=0)
-        fprintf(w,"\t\tPalavra mais comum: \'%s\' aparece %d vezes\n\t\tNumero total de palavras: %d \n",wordMax,num,g_hash_table_size(words));
+        fprintf(w,"\tPalavra mais comum: \'%s\' aparece %d vezes\n\tNumero total de palavras: %d \n",wordMax,num,g_hash_table_size(words));
     g_hash_table_remove_all (words);
 }
 /*
