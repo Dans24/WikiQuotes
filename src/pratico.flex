@@ -1,7 +1,10 @@
 %{
     #include<stdio.h>
     #include<string.h>
+    #include <gmodule.h>
     #define BUFFER_LENGTH   2048
+    void goThrough(FILE* w);
+    void addword(char *w);
     FILE * f;
     char title[BUFFER_LENGTH];
     int titleidx = 0;
@@ -15,6 +18,7 @@
     FILE * q;
     FILE * qstats;
     FILE * pstats;
+    GHashTable *words;
 %}
 %option main
 %option yylineno
@@ -22,13 +26,15 @@
 
 %x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS
 %%
-      
+    words = g_hash_table_new_full (g_str_hash, g_str_equal,g_free,NULL);
     f = stdout;
     qstats = fopen("QuoteStatistics.txt","w");
     pstats = fopen("ProbsStatistics.txt","w");
     q = fopen("quotes.txt","w");
     p = fopen("probs.txt","w");
     int adults = 0;
+    char word[2500];
+    int wordsize = 0;
 
 \<page\>                    {
                                 BEGIN(PAGE);
@@ -99,13 +105,16 @@ Nome\ *=\s*    {
                         fprintf(qstats,"\tAuthor: %s\n",autor);
                     if(quotes)
                         fprintf(qstats,"\tnº quotes:%d\n",quotes);
+                    goThrough(qstats);
                 }
             }
 }
 
+        
 <QUOTE>{
 \[ {}
 \] {}
+br&gt {}
 (&quot;|”|\n|»)      {
                                 BEGIN(QUOTEPAGE);
                                 if(autor[0]) {
@@ -114,10 +123,26 @@ Nome\ *=\s*    {
                                     fprintf(q, "”\n");
                                 }
                                 quotes++;
+                                if (wordsize>0){
+                                    word[wordsize]=0;
+                                    addword(word);
+                                    wordsize = 0;
+                                }
                             }
                             
+(\r|\ |\.|\,|\:|\“|\;|\!|\?|\)|\()                  {
+                        if (wordsize>0){
+                            word[wordsize]=0;
+                            wordsize = 0;
+                            //addword(word);
+                        }
+                        fprintf(q, "%s", yytext);
+                    }
+
 .                 {
-                                    fprintf(q, "%s", yytext);
+                        if(yytext[0]!='\n')
+                            word[wordsize++] = yytext[0]; 
+                        fprintf(q, "%s", yytext);
                      }
 }
 
@@ -140,17 +165,33 @@ Nome\ *=\s*    {
                         fprintf(pstats,"\tnº probs:%d\n",probs);
                     if(adults)
                         fprintf(pstats,"\tAdulteraçoes %d\n",adults);
+                    goThrough(pstats);
             }
 }
 }
     
 <PROVERBIO>{
-\n {BEGIN(PROBPAGE);}
-(&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]) {}
+\n {                            BEGIN(PROBPAGE);
+                                if (wordsize>0){
+                                    word[wordsize]=0;
+                                    addword(word);
+                                    wordsize = 0;
+                                }
+        }
+(&lt|&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]) {}
+(\r|\ |\.|\,|\:|\“|\;|\!|\?)                  {
+                        if (wordsize>1){
+                            word[wordsize]=0;
+                            addword(word);
+                            wordsize = 0;
+                        }
+                        fprintf(q, "%s", yytext);
+                    }
 . {
-    if(proverbio)
-        fprintf(p,"%s",yytext);
-    }
+    if(yytext[0]!='\n')
+        word[wordsize++] = yytext[0]; 
+    fprintf(p,"%s",yytext);
+  }
 }
 
 
@@ -168,6 +209,40 @@ Nome\ *=\s*    {
 <*>.|\n {}
 %%
 
+
+void addword(char *w){
+    if (w[0]=='\0'|| w[0]=='\n') return;
+    int size = strlen(w);
+    if (w[size-1]=='\v') w[size-1]='\n';
+    if(!g_hash_table_contains (words,w))
+        g_hash_table_insert (words,strdup(w),(gpointer)1);
+    else{
+        int z = (int) g_hash_table_lookup (words,w);
+        g_hash_table_insert (words,strdup(w),(gpointer)(z+1));
+    }
+}
+
+void goThrough(FILE* w){
+    GHashTableIter iter;
+    gpointer key, value;
+    g_hash_table_iter_init (&iter, words);
+    int num = 0; char* wordMax;
+    int total = 0;
+    while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+        // do something with key and value
+        if(key!=NULL){
+            total+=(int)value;
+        }
+        if(key!= NULL && (int)value>num){
+           num = (int)value; 
+           wordMax = (char*)key;
+        }
+    }
+    if (num!=0)
+        fprintf(w,"\t\tPalavra mais comum: \'%s\' aparece %d vezes\n\t\tNumero total de palavras: %d \n",wordMax,num,g_hash_table_size(words));
+    g_hash_table_remove_all (words);
+}
 /*
 int main(int argc, char* argv[]){
     char* option = 0;
