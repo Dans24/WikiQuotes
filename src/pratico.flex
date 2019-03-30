@@ -218,9 +218,10 @@ br&gt {}
 
 
 <PROBOPTIONALS>{
-./\n(\*|\*\*)\  {fprintf(p,"%s",yytext);
+./\n((\*\*\*)\ |[^\*])  {fprintf(p,"%s",yytext);
           BEGIN(PROBPAGE);
          }
+
 \n {fprintf(p,"\n\t\t");}
 \*\*\* {adults++;}
 (\[|\]|&quot;|\*|\(.*\)) {}
