@@ -66,7 +66,6 @@ S   [\ \t]
 \<\/title\>     {
                     title[titleidx]='\0';
                     if(!strncmp("Provérbios", title, strlen("Provérbios"))){
-                        fprintf(p,"PROVERBIOS :%s: \n\n",title);
                         BEGIN(PROBPAGE);
                         proverbio=1;
                         adults = 0;
@@ -176,7 +175,7 @@ br&gt {}
 }
 .*(Adulterados|Adulteração):.*\n   {
         BEGIN(PROBOPTIONALS);
-        fprintf(p,"\nAdulteraçoes:\n\t\t");
+        fprintf(p,"Adulteraçoes:\n\t\t");
 }
 \**\  {}
 \<\/page\> {
@@ -193,12 +192,13 @@ br&gt {}
 }
     
 <PROVERBIO>{
-&quot;      {                   BEGIN(PROBPAGE);
+&quot;      {              BEGIN(PROBPAGE);
                                 if (wordsize>0){
                                     word[wordsize]=0;
                                     addword(word);
                                     wordsize = 0;
                                 }
+                                fprintf(p,"\n");
         }
 (&lt|&lt;u&gt;|&lt;\/u&gt;|''|\[|\]) {}
 (\r|\ |\.|\,|\:|\“|\;|\!|\?)                  {
