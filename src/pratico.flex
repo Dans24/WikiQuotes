@@ -240,8 +240,8 @@ void addword(char *w){
     if(!g_hash_table_contains (words,w))
         g_hash_table_insert (words,strdup(w),(gpointer)1);
     else{
-        int z = (int) g_hash_table_lookup (words,w);
-        g_hash_table_insert (words,strdup(w),(gpointer)(z+1));
+        int z = (long int) g_hash_table_lookup (words,w);
+        g_hash_table_insert (words,strdup(w),(gpointer)(long)(z+1));
     }
 }
 
@@ -255,10 +255,10 @@ void goThrough(FILE* w){
     {
         // do something with key and value
         if(key!=NULL){
-            total+=(int)value;
+            total+=(long int)value;
         }
-        if(key!= NULL && (int)value>num){
-           num = (int)value; 
+        if(key!= NULL && (long int)value>num){
+           num = (long int)value; 
            wordMax = (char*)key;
         }
     }
@@ -266,27 +266,3 @@ void goThrough(FILE* w){
         fprintf(w,"\tPalavra mais comum: \'%s\' aparece %d vezes\n\tNumero total de palavras: %d \n",wordMax,num,g_hash_table_size(words));
     g_hash_table_remove_all (words);
 }
-/*
-int main(int argc, char* argv[]){
-    char* option = 0;
-    f = stdout; // Print in stdout by default
-    yyin = stdin; // Read from stdin by default
-    for(int i = 1; i < argc; i++) {
-        if(argv[i][0] == '-'){
-            option = &(argv[i][1]);
-            continue;
-        }
-        if(strcmp(option, "o") != 0) {
-            f = fopen (argv[i] , "w");
-            printf("W:%s\n",argv[i]);
-            continue;
-        } else if(strcmp(option, "p") != 0) {
-            proverbioOption = 1;
-        }
-        printf("R:%s\n",argv[i]);
-        yyin = fopen(argv[i], "r");
-    }
-    yylex();
-    return 0;
-}
-*/
