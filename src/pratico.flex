@@ -26,7 +26,7 @@
 
 S   [\ \t]
 
-%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS LINK
+%x PAGE QUOTE AUTOR PROVERBIO TITLE QUOTEPAGE PROBPAGE PROBOPTIONALS LINK ADULT
 %%
     words = g_hash_table_new_full (g_str_hash, g_str_equal,g_free,NULL);
     f = stdout;
@@ -175,7 +175,7 @@ br&gt {}
 }
 .*(Adulterados|Adulteração):.*\n   {
         BEGIN(PROBOPTIONALS);
-        fprintf(p,"Adulteraçoes:\n\t\t");
+        fprintf(p,"Adulteraçoes:");
 }
 \**\  {}
 \<\/page\> {
@@ -218,15 +218,30 @@ br&gt {}
 
 
 <PROBOPTIONALS>{
-./\n(\*\ |\*\*\ |[^\*])  {fprintf(p,"%s",yytext);
-          BEGIN(PROBPAGE);
+./\n(\*\ |\*\*\ |[^\*])  {
+                fprintf(p,"%s",yytext);
+                BEGIN(PROBPAGE);
+                
          }
-
-\n {fprintf(p,"\n\t\t");}
-\*\*\* {adults++;}
-(\[|\]|&quot;|\*|\(.*\)) {}
-. {fprintf(p,"%s",yytext);}
+\*\*\*\ *&quot;   {
+                        fprintf(p,"\n\t");
+                        adults++;
+                        BEGIN(ADULT); 
+                    }
 }
+
+<ADULT>{
+&quot;                      {
+                                BEGIN(PROBOPTIONALS);
+                            }
+(\[|\]|\*|\(.*\))    {}
+.                           {
+                                fprintf(p, "%s", yytext);
+                            }
+
+}
+
+
 
 
 <*>.|\n {}
