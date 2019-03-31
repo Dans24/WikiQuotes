@@ -170,7 +170,7 @@ br&gt {}
 
      
 <PROBPAGE>{
-\*\        {
+\n\*\ &quot;      {
                             probs++;
                             BEGIN(PROVERBIO);
 }
@@ -193,14 +193,14 @@ br&gt {}
 }
     
 <PROVERBIO>{
-\n {                            BEGIN(PROBPAGE);
+&quot;      {                   BEGIN(PROBPAGE);
                                 if (wordsize>0){
                                     word[wordsize]=0;
                                     addword(word);
                                     wordsize = 0;
                                 }
         }
-(&lt|&lt;u&gt;|&lt;\/u&gt;|''|&quot;|\[|\]|\(.*\)) {}
+(&lt|&lt;u&gt;|&lt;\/u&gt;|''|\[|\]) {}
 (\r|\ |\.|\,|\:|\“|\;|\!|\?)                  {
                         if (wordsize>1){
                             word[wordsize]=0;
@@ -218,7 +218,7 @@ br&gt {}
 
 
 <PROBOPTIONALS>{
-./\n((\*\*\*)\ |[^\*])  {fprintf(p,"%s",yytext);
+./\n(\*\ |\*\*\ |[^\*])  {fprintf(p,"%s",yytext);
           BEGIN(PROBPAGE);
          }
 
