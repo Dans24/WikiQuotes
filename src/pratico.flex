@@ -12,8 +12,6 @@
     int quotes;
     char autor[BUFFER_LENGTH];
     int autorIndex = 0;
-    int proverbio = 0;
-    int proverbioOption = 0;
     FILE * p;
     FILE * q;
     FILE * qstats;
@@ -46,7 +44,6 @@ S   [\ \t]
                                 titleidx = 0;
                                 probs = 0;
                                 quotes = 0;
-                                proverbio = 0;
                             }
 
 <PAGE>{
@@ -68,7 +65,6 @@ S   [\ \t]
                     if(!strncmp("Provérbios", title, strlen("Provérbios"))){
                         fprintf(p,"PROVERBIOS :%s: \n\n",title);
                         BEGIN(PROBPAGE);
-                        proverbio=1;
                         adults = 0;
                     }
                     else{
@@ -101,9 +97,7 @@ Wikipedia{S}*={S}* { if(!autorIndex) BEGIN(AUTOR); }
 
 \*{S}*(&quot;|“('')?|«){S}*    {
                             BEGIN(QUOTE);
-                            if(!(proverbioOption && !proverbio)) {
-                                fprintf(q,"“");
-                            }
+                            fprintf(q,"“");
                         }
 \<\/page\> {
                 BEGIN(0);
