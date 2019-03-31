@@ -228,7 +228,7 @@ br&gt {}
 &quot;                      {
                                 BEGIN(PROBOPTIONALS);
                             }
-(\[|\]|\*|\(.*\))    {}
+(\[|\]|\*)    {}
 .                           {
                                 fprintf(p, "%s", yytext);
                             }
