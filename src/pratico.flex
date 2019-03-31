@@ -169,7 +169,7 @@ br&gt {}
 
      
 <PROBPAGE>{
-\n\*\ &quot;      {
+\n\*\ &quot;\ *      {
                             probs++;
                             BEGIN(PROVERBIO);
 }
