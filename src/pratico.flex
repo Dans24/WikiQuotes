@@ -163,15 +163,15 @@ br&gt {}
 
      
 <PROBPAGE>{
-\n\*\ &quot;\ *      {
-                            probs++;
-                            BEGIN(PROVERBIO);
-}
 .*(Adulterados|Adulteração):.*\n   {
         BEGIN(PROBOPTIONALS);
         fprintf(p,"Adulteraçoes:");
 }
-\**\  {}
+\*\ *&quot;\ *      {
+                            probs++;
+                            BEGIN(PROVERBIO);
+}
+
 \<\/page\> {
             BEGIN(0);
             if(probs || quotes){
@@ -186,7 +186,7 @@ br&gt {}
 }
     
 <PROVERBIO>{
-&quot;      {              BEGIN(PROBPAGE);
+(&quot;|\n)      {              BEGIN(PROBPAGE);
                                 if (wordsize>0){
                                     word[wordsize]=0;
                                     addword(word);
