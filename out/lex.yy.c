@@ -1027,7 +1027,6 @@ YY_RULE_SETUP
 {
                     title[titleidx]='\0';
                     if(!strncmp("Provérbios", title, strlen("Provérbios"))){
-                        fprintf(p,"PROVERBIOS :%s: \n\n",title);
                         BEGIN(PROBPAGE);
                         adults = 0;
                     }
@@ -1040,13 +1039,13 @@ YY_RULE_SETUP
 
 case 7:
 YY_RULE_SETUP
-#line 78 "src/pratico.flex"
+#line 77 "src/pratico.flex"
 {}                                                              
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 79 "src/pratico.flex"
+#line 78 "src/pratico.flex"
 {
                                 BEGIN(QUOTEPAGE);
                                 autor[autorIndex] = 0;
@@ -1055,14 +1054,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 84 "src/pratico.flex"
+#line 83 "src/pratico.flex"
 {
                                 autor[autorIndex++] = '\"';
 }                            
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 87 "src/pratico.flex"
+#line 86 "src/pratico.flex"
 {
                                 autor[autorIndex++] = yytext[0];
                             }
@@ -1071,19 +1070,19 @@ YY_RULE_SETUP
 
 case 11:
 YY_RULE_SETUP
-#line 93 "src/pratico.flex"
+#line 92 "src/pratico.flex"
 {
                     BEGIN(AUTOR);
                 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 97 "src/pratico.flex"
+#line 96 "src/pratico.flex"
 { if(!autorIndex) BEGIN(AUTOR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 99 "src/pratico.flex"
+#line 98 "src/pratico.flex"
 {
                             BEGIN(QUOTE);
                             fprintf(q,"“");
@@ -1091,7 +1090,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 103 "src/pratico.flex"
+#line 102 "src/pratico.flex"
 {
                 BEGIN(0);
                 if(probs || quotes){
@@ -1108,23 +1107,23 @@ YY_RULE_SETUP
 
 case 15:
 YY_RULE_SETUP
-#line 118 "src/pratico.flex"
+#line 117 "src/pratico.flex"
 {}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 119 "src/pratico.flex"
+#line 118 "src/pratico.flex"
 {}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 120 "src/pratico.flex"
+#line 119 "src/pratico.flex"
 {}
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 121 "src/pratico.flex"
+#line 120 "src/pratico.flex"
 {
                                 BEGIN(QUOTEPAGE);
                                 if(autor[0]) {
@@ -1142,7 +1141,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 136 "src/pratico.flex"
+#line 135 "src/pratico.flex"
 {
                         if (wordsize>0){
                             word[wordsize]=0;
@@ -1154,7 +1153,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 145 "src/pratico.flex"
+#line 144 "src/pratico.flex"
 {
                         if(yytext[0]!='\n')
                             word[wordsize++] = yytext[0]; 
@@ -1163,28 +1162,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 150 "src/pratico.flex"
+#line 149 "src/pratico.flex"
 {
                         fprintf(q, "\"");
                     }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 153 "src/pratico.flex"
+#line 152 "src/pratico.flex"
 { BEGIN(LINK); }
 	YY_BREAK
 
 
 case 23:
 YY_RULE_SETUP
-#line 157 "src/pratico.flex"
+#line 156 "src/pratico.flex"
 {
                         BEGIN(QUOTE);
                     }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 160 "src/pratico.flex"
+#line 159 "src/pratico.flex"
 {
                         fprintf(q, "%s", yytext);
                     }
@@ -1192,7 +1191,7 @@ YY_RULE_SETUP
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 163 "src/pratico.flex"
+#line 162 "src/pratico.flex"
 {}
 	YY_BREAK
 
@@ -1200,7 +1199,7 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 168 "src/pratico.flex"
+#line 167 "src/pratico.flex"
 {
                             probs++;
                             BEGIN(PROVERBIO);
@@ -1209,20 +1208,20 @@ YY_RULE_SETUP
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 172 "src/pratico.flex"
+#line 171 "src/pratico.flex"
 {
         BEGIN(PROBOPTIONALS);
-        fprintf(p,"\nAdulteraçoes:\n\t\t");
+        fprintf(p,"Adulteraçoes:\n\t\t");
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 176 "src/pratico.flex"
+#line 175 "src/pratico.flex"
 {}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 177 "src/pratico.flex"
+#line 176 "src/pratico.flex"
 {
             BEGIN(0);
             if(probs || quotes){
@@ -1239,13 +1238,14 @@ YY_RULE_SETUP
 
 case 30:
 YY_RULE_SETUP
-#line 191 "src/pratico.flex"
-{                   BEGIN(PROBPAGE);
+#line 190 "src/pratico.flex"
+{              BEGIN(PROBPAGE);
                                 if (wordsize>0){
                                     word[wordsize]=0;
                                     addword(word);
                                     wordsize = 0;
                                 }
+                                fprintf(p,"\n");
         }
 	YY_BREAK
 case 31:
