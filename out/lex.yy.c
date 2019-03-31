@@ -374,8 +374,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 16
-#define YY_END_OF_BUFFER 17
+#define YY_NUM_RULES 40
+#define YY_END_OF_BUFFER 41
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -383,159 +383,259 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[131] =
+static const flex_int16_t yy_accept[231] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,   17,   15,   15,   15,   15,   11,   10,   11,
-       11,   11,   11,   13,   13,   13,    8,    7,   15,    0,
-        0,    0,    0,    0,    0,    0,    0,    9,   10,    0,
-       14,    0,    0,    0,    0,    0,    3,    0,    0,    0,
-        0,    0,   12,    0,    0,    0,    3,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    1,
-        0,    0,    0,    0,    0,    2,    0,    0,    0,    0,
-        0,    5,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+       41,   39,   39,   39,   20,   18,   19,   20,   20,   15,
+       16,   20,   20,   20,   10,    8,   10,    7,    8,   33,
+       30,   32,   33,   33,   33,   31,   33,    5,    5,    4,
+       39,   39,   39,   39,   39,   28,   39,   39,   39,   38,
+       35,   38,   38,   37,   37,   24,   39,   24,   24,   24,
+        0,    0,    0,    0,    0,   22,    0,   18,    0,    0,
+        0,    0,   31,    0,   31,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,   26,    0,    0,    0,
 
-        0,    4,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,   37,    0,    0,   25,   23,    0,    0,
+        0,    0,   21,    0,   19,    9,   31,    0,   32,    0,
+        0,   13,    0,    0,    0,    0,   28,    0,    0,   34,
+        0,    0,   36,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,   13,   13,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,   17,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    6,    6,    0
+        1,    0,    0,    0,    0,    0,    0,    0,   11,    0,
+        0,    0,   37,    3,    2,    0,    0,    0,   14,   11,
+        0,   29,    0,    0,    0,    6,    0,    0,    0,    0,
+
+        0,    0,    0,   12,    0,    0,   12,    0,    0,    0,
+        0,    0,   27,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    4,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    3,    1,    4,    1,    1,    1,    5,    1,    1,
-        1,    6,    1,    1,    1,    1,    7,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    8,    9,   10,
-       11,   12,    1,    1,   13,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,   14,    1,   15,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-       16,    1,   17,    1,    1,    1,   18,   19,   20,    1,
+        1,    5,    6,    1,    1,    1,    1,    7,    8,    9,
+       10,   11,    1,   12,    1,   13,   14,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,   15,   16,   17,
+       18,   19,   20,    1,   21,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,   22,    1,    1,
+        1,    1,    1,    1,    1,    1,   23,    1,    1,    1,
+       24,    1,   25,    1,    1,    1,   26,   27,    1,   28,
 
-       21,    1,   22,    1,   23,    1,    1,   24,   25,    1,
-       26,   27,   28,   29,   30,   31,   32,   33,    1,   34,
-        1,    1,   35,   36,    1,    1,    1,   37,    1,    1,
+       29,    1,   30,    1,   31,    1,   32,   33,   34,    1,
+       35,   36,   37,   38,   39,   40,   41,    1,    1,    1,
+        1,    1,    1,   42,    1,    1,    1,   43,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,   38,   39,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,   40,    1,
-       41,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,   42,    1,    1,    1,
-        1,    1,    1,   43,   44,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,   44,   45,    1,    1,    1,
+        1,    1,   46,    1,    1,    1,   47,    1,    1,    1,
+       48,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,   49,    1,    1,    1,
+        1,    1,    1,   50,   51,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,   45,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1
-    } ;
-
-static const YY_CHAR yy_meta[46] =
-    {   0,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,   52,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[136] =
+static const YY_CHAR yy_meta[53] =
     {   0,
-      142,  141,    0,    1,    0,    7,    0,    1,  148,  147,
-      138,  137,  146,  153,  118,   10,    1,  153,  153,  116,
-      127,  100,  104,  153,  123,  122,  153,  153,  131,  119,
-       16,  108,   94,   97,  106,    1,  100,  153,  153,   92,
-      153,  113,  112,   97,  105,   94,  122,   86,  105,   88,
-       90,   94,  102,   95,   96,   90,  112,   92,   82,   88,
-       80,   79,   97,   77,   86,  103,   84,   95,   79,  153,
-       93,   89,    0,   88,   78,  153,   73,   82,   84,   71,
-       65,  153,   85,   66,   61,   57,   62,   44,   69,   46,
-       65,   55,   62,   63,   70,   57,   75,   52,   50,   46,
-
-       46,  153,   53,   43,   51,   42,   37,   39,   53,   44,
-       19,   16,   36,   14,   13,   16,   10,   33,   11,   22,
-       17,   24,    4,    4,    7,   30,   37,   23,    1,  153,
-       61,   63,   65,   67,    0
+        1,    1,    2,    1,    1,    1,    1,    1,    3,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    3,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1
     } ;
 
-static const flex_int16_t yy_def[136] =
+static const flex_int16_t yy_base[245] =
     {   0,
-      131,  131,  131,  131,  132,  132,  133,  133,  134,  134,
-      131,  131,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  135,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  135,  135,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  135,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      417,  416,  415,  414,    0,   50,   43,   68,  108,  158,
+       11,   14,   26,   61,   77,   84,  127,  132,  144,  178,
+      430,  435,  393,    4,  435,  435,  435,  391,  419,  402,
+      435,  387,  375,  380,  435,  435,  414,  435,  435,  435,
+      435,  435,    8,  413,  410,  435,  376,  435,  404,  435,
+      143,  403,  381,  384,  393,  392,   21,    8,    2,  409,
+      435,   44,   30,    8,  408,  368,  367,  435,  383,  435,
+      381,  370,  374,  363,  395,  435,  395,  435,   46,  393,
+      360,  358,  435,  388,  387,  352,  355,  187,  357,  345,
+      349,  355,  356,  357,  367,   58,  366,   98,   86,   85,
 
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,    0,
-      130,  130,  130,  130,  130
+      375,  344,   94,  115,  373,  341,  435,  435,  352,  355,
+      340,  344,  435,  348,  435,  435,  361,  341,  435,  344,
+      333,   59,  329,  346,  342,  339,  348,  116,   75,  435,
+      357,  332,  435,  337,  335,  331,  323,  322,  117,  321,
+      320,  324,  144,  194,  328,  195,  321,  138,  151,  345,
+      303,  321,  283,  282,  294,  435,  267,  300,  290,  272,
+      264,  294,  270,  196,  174,  269,  156,  183,  292,  280,
+      435,  274,  273,  284,  258,  258,  270,  266,  227,  228,
+      108,  169,  435,  435,  435,  222,  211,  209,  435,  145,
+      124,  123,  154,  100,   53,  435,    8,  187,    5,  204,
+
+      184,   52,  216,  221,  190,  195,  222,  210,  196,  227,
+      212,  229,  435,  232,  233,  237,  238,  240,  241,  242,
+      252,  246,  254,  261,  262,  269,  268,  273,  274,  435,
+      314,  317,  320,  323,  326,  329,  332,  335,  338,  341,
+      344,  347,  349,  352
     } ;
 
-static const flex_int16_t yy_nxt[199] =
+static const flex_int16_t yy_def[245] =
     {   0,
-       42,   19,   73,  129,   20,   16,   16,   35,   19,   17,
-       17,   20,   31,  120,   32,   21,   25,   25,   31,  122,
-       32,   50,   21,   51,  120,  129,  122,  126,  125,  124,
-      123,   36,  127,   77,  119,   26,   26,  123,  118,  127,
-      128,  117,   22,  116,   23,  115,  121,  128,  114,   22,
-      113,   23,   33,  112,   34,  111,  110,  121,   33,  109,
-       34,   14,   14,   18,   18,   24,   24,   27,   27,  108,
-      107,  106,  105,  104,  103,  102,  101,  100,   99,   98,
-       97,   96,   95,   94,   93,   92,   91,   90,   89,   88,
-       87,   86,   85,   84,   83,   82,   81,   80,   79,   78,
+      231,  231,  231,  231,  232,  232,  233,  233,  234,  234,
+      235,  235,  231,  231,  236,  236,  237,  237,  238,  238,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  239,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  240,  240,  240,  240,  240,  230,
+      230,  230,  241,  230,  230,  242,  242,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  239,  239,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  240,  240,  240,  240,  240,  240,
 
-       76,   47,   75,   39,   74,   73,   72,   71,   70,   69,
-       68,   67,   66,   65,   57,   64,   63,   62,   53,   61,
-       60,   59,   58,   47,   57,   56,   55,   54,   53,   43,
-       39,   52,   49,   48,   47,   46,   45,   44,   43,   41,
-       40,   39,   38,   37,   30,  130,   29,   29,   28,   28,
-       15,   15,   13,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130
+      243,  230,  241,  241,  230,  242,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  240,  240,  240,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  240,  240,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  240,  240,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      240,  240,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  240,  240,  230,  230,  230,  230,  240,  230,  230,
 
+      240,  240,  230,  230,  240,  240,  230,  240,  240,  244,
+      240,  244,  230,  244,  244,  244,  244,  244,  244,  244,
+      244,  244,  244,  244,  244,  244,  244,  244,  244,    0,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230
     } ;
 
-static const flex_int16_t yy_chk[199] =
+static const flex_int16_t yy_nxt[488] =
     {   0,
-      135,    5,   73,  129,    5,    3,    4,   17,    6,    3,
-        4,    6,   16,  119,   16,    5,    7,    8,   31,  121,
-       31,   36,    6,   36,  120,  128,  122,  125,  124,  123,
-      121,   17,  126,   73,  118,    7,    8,  122,  117,  127,
-      126,  116,    5,  115,    5,  114,  119,  127,  113,    6,
-      112,    6,   16,  111,   16,  110,  109,  120,   31,  108,
-       31,  131,  131,  132,  132,  133,  133,  134,  134,  107,
-      106,  105,  104,  103,  101,  100,   99,   98,   97,   96,
-       95,   94,   93,   92,   91,   90,   89,   88,   87,   86,
-       85,   84,   83,   81,   80,   79,   78,   77,   75,   74,
+      230,  230,   26,   27,   27,   27,   28,   29,   27,   27,
+      101,   27,   27,   22,   27,   27,   22,   72,  105,   27,
+       83,   99,   96,   30,   31,   97,   32,   49,   96,  100,
+       49,   98,  101,  200,   50,   50,   51,   50,   50,  104,
+       81,   96,   52,   73,   82,   36,  101,   53,   54,   33,
+       37,   34,   26,   27,   27,   27,   28,   29,   27,   27,
+      143,   27,   27,  143,   27,   27,   38,   38,   83,   27,
+       36,   51,   96,   30,   31,   37,   32,   52,   96,   22,
+      102,   56,   53,   54,   39,  100,   22,   57,   56,  115,
+       78,   38,   38,   58,   57,   96,  230,   59,  206,   33,
 
-       72,   71,   69,   68,   67,   66,   65,   64,   63,   62,
-       61,   60,   59,   58,   57,   56,   55,   54,   53,   52,
-       51,   50,   49,   48,   47,   46,   45,   44,   43,   42,
-       40,   37,   35,   34,   33,   32,   30,   29,   26,   25,
-       23,   22,   21,   20,   15,   13,   12,   11,   10,    9,
-        2,    1,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130
+       58,   34,  127,  104,   59,   96,   96,  149,   98,   39,
+       41,   42,   42,   42,   43,   44,   45,  230,   96,   42,
+       42,  128,   42,   42,  104,  129,  192,   42,   96,   61,
+      157,   46,   46,   62,   61,   63,   96,   64,   62,  199,
+       63,  148,   64,   96,   88,  143,   67,   88,  143,   89,
+       65,   65,   68,   68,  197,   65,   65,  158,   96,   47,
+       41,   42,   42,   42,   43,   44,   45,  167,   69,   42,
+       42,   96,   42,   42,   96,  179,   96,   42,  179,  198,
+       67,   46,   46,  190,  181,   70,   68,   68,   88,   96,
+      168,   88,   90,   89,   91,  143,  164,  164,  143,  164,
 
+      164,  162,   69,   96,   96,  203,  193,   96,  203,   47,
+       96,  182,  165,  165,  201,   96,   96,  203,  205,   70,
+      203,  204,  207,  207,  210,  207,  207,  196,  208,  213,
+       96,  213,   96,  204,  213,  213,   90,  202,   91,  213,
+      213,  211,  213,  213,  213,  209,  208,  214,  213,  214,
+      195,  194,  214,  214,  213,  191,  213,  214,  214,  215,
+      214,  214,  214,  213,  213,  190,  214,  221,  219,  217,
+      213,  213,  214,  216,  214,  213,  213,  218,  220,  222,
+      224,  214,  214,  228,  189,  122,  188,  187,  214,  214,
+      186,  185,  184,  214,  214,  183,  130,  180,  178,  226,
+
+      225,  122,  223,  177,  176,   83,  175,  174,  226,   78,
+      173,  172,  227,  229,   22,   22,   22,   25,   25,   25,
+       35,   35,   35,   40,   40,   40,   48,   48,   48,   55,
+       55,   55,   60,   60,   60,   66,   66,   66,   84,  171,
+       84,   95,  170,   95,  103,  103,  103,  106,  106,  130,
+      130,  130,  212,  212,  212,  169,  166,  163,  161,  160,
+      159,  156,  155,  154,  153,  152,  151,  150,   96,  147,
+      146,  145,  144,  142,  141,  140,  139,  138,  137,  136,
+      135,  134,  107,  133,  132,  131,   96,   96,  126,  125,
+      124,  123,  122,  121,  120,  119,   85,   85,  118,  117,
+
+      116,  114,  113,  112,  111,  110,  109,  108,  107,  107,
+      101,  101,   96,   96,   94,   93,   92,   87,   86,   85,
+       83,   80,   79,   78,   77,   76,   75,   74,   71,  230,
+       24,   24,   23,   23,   21,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230
+    } ;
+
+static const flex_int16_t yy_chk[488] =
+    {   0,
+        0,    0,    5,    5,    5,    5,    5,    5,    5,    5,
+       64,    5,    5,   11,    5,    5,   12,   24,   64,    5,
+      199,   58,   59,    5,    5,   57,    5,   11,   58,   59,
+       12,   57,   63,  197,   11,   11,   13,   12,   12,   63,
+       43,   57,   13,   24,   43,    7,   62,   13,   13,    5,
+        7,    5,    6,    6,    6,    6,    6,    6,    6,    6,
+      122,    6,    6,  122,    6,    6,    7,    7,  195,    6,
+        8,   14,  202,    6,    6,    8,    6,   14,   96,   15,
+       62,   15,   14,   14,    7,   96,   16,   15,   16,   79,
+       79,    8,    8,   15,   16,  129,  103,   15,  202,    6,
+
+       16,    6,   98,  103,   16,  100,   99,  129,   98,    8,
+        9,    9,    9,    9,    9,    9,    9,  104,   98,    9,
+        9,   99,    9,    9,  104,  100,  181,    9,  181,   17,
+      139,    9,    9,   17,   18,   17,  128,   17,   18,  194,
+       18,  128,   18,  192,   51,  143,   19,   51,  143,   51,
+       17,   17,   19,   19,  191,   18,   18,  139,  148,    9,
+       10,   10,   10,   10,   10,   10,   10,  148,   19,   10,
+       10,  149,   10,   10,  193,  165,  167,   10,  165,  193,
+       20,   10,   10,  190,  167,   19,   20,   20,   88,  182,
+      149,   88,   51,   88,   51,  144,  146,  164,  144,  146,
+
+      164,  144,   20,  168,  201,  200,  182,  198,  200,   10,
+      205,  168,  146,  164,  198,  206,  209,  203,  201,   20,
+      203,  200,  204,  207,  208,  204,  207,  188,  205,  210,
+      208,  212,  211,  203,  214,  215,   88,  198,   88,  216,
+      217,  209,  218,  219,  220,  206,  211,  210,  222,  212,
+      187,  186,  214,  215,  221,  180,  223,  216,  217,  214,
+      218,  219,  220,  224,  225,  179,  222,  220,  218,  216,
+      227,  226,  221,  215,  223,  228,  229,  217,  219,  221,
+      222,  224,  225,  226,  178,  177,  176,  175,  227,  226,
+      174,  173,  172,  228,  229,  170,  169,  166,  163,  224,
+
+      223,  162,  221,  161,  160,  159,  158,  157,  229,  155,
+      154,  153,  225,  227,  231,  231,  231,  232,  232,  232,
+      233,  233,  233,  234,  234,  234,  235,  235,  235,  236,
+      236,  236,  237,  237,  237,  238,  238,  238,  239,  152,
+      239,  240,  151,  240,  241,  241,  241,  242,  242,  243,
+      243,  243,  244,  244,  244,  150,  147,  145,  142,  141,
+      140,  138,  137,  136,  135,  134,  132,  131,  127,  126,
+      125,  124,  123,  121,  120,  118,  117,  114,  112,  111,
+      110,  109,  106,  105,  102,  101,   97,   95,   94,   93,
+       92,   91,   90,   89,   87,   86,   85,   84,   82,   81,
+
+       80,   77,   75,   74,   73,   72,   71,   69,   67,   66,
+       65,   60,   56,   55,   54,   53,   52,   49,   47,   45,
+       44,   37,   34,   33,   32,   30,   29,   28,   23,   21,
+        4,    3,    2,    1,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230,  230,  230,  230,
+      230,  230,  230,  230,  230,  230,  230
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[17] =
+static const flex_int32_t yy_rule_can_match_eol[41] =
     {   0,
-0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0,     };
+0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+    0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 
+    0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -554,22 +654,39 @@ char *yytext;
 #line 1 "src/pratico.flex"
 #line 2 "src/pratico.flex"
     #include<stdio.h>
+    #include<string.h>
+    #include <gmodule.h>
     #define BUFFER_LENGTH   2048
+    void goThrough(FILE* w);
+    void addword(char *w);
     FILE * f;
+    char title[BUFFER_LENGTH];
+    int titleidx = 0;
+    int probs;
+    int quotes;
     char autor[BUFFER_LENGTH];
     int autorIndex = 0;
     int proverbio = 0;
     int proverbioOption = 0;
-#line 564 "out/lex.yy.c"
+    FILE * p;
+    FILE * q;
+    FILE * qstats;
+    FILE * pstats;
+    GHashTable *words;
+#line 677 "out/lex.yy.c"
 
-#line 566 "out/lex.yy.c"
+#line 679 "out/lex.yy.c"
 
 #define INITIAL 0
 #define PAGE 1
 #define QUOTE 2
-#define LINK 3
-#define AUTOR 4
-#define PROVERBIO 5
+#define AUTOR 3
+#define PROVERBIO 4
+#define TITLE 5
+#define QUOTEPAGE 6
+#define PROBPAGE 7
+#define PROBOPTIONALS 8
+#define LINK 9
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -784,11 +901,20 @@ YY_DECL
 		}
 
 	{
-#line 15 "src/pratico.flex"
+#line 30 "src/pratico.flex"
 
-#line 17 "src/pratico.flex"
+#line 32 "src/pratico.flex"
+    words = g_hash_table_new_full (g_str_hash, g_str_equal,g_free,NULL);
     f = stdout;
-#line 792 "out/lex.yy.c"
+    qstats = fopen("QuoteStatistics.txt","w");
+    pstats = fopen("ProbsStatistics.txt","w");
+    q = fopen("quotes.txt","w");
+    p = fopen("probs.txt","w");
+    int adults = 0;
+    char word[2500];
+    int wordsize = 0;
+
+#line 918 "out/lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -815,13 +941,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 131 )
+				if ( yy_current_state >= 231 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 153 );
+		while ( yy_base[yy_current_state] != 435 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -857,133 +983,360 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 18 "src/pratico.flex"
+#line 42 "src/pratico.flex"
 {
                                 BEGIN(PAGE);
-                                autor[0] = 0;    
+                                autor[0] = 0;
+                                autorIndex = 0;
+                                title[0] = 0;
+                                titleidx = 0;
+                                probs = 0;
+                                quotes = 0;
+                                proverbio = 0;
                             }
 	YY_BREAK
+
 case 2:
 YY_RULE_SETUP
-#line 22 "src/pratico.flex"
-{BEGIN(0);}
+#line 54 "src/pratico.flex"
+{   
+                            
+                            BEGIN(TITLE);
+                        }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "src/pratico.flex"
-{
-                                BEGIN(QUOTE);
-                                if(!(proverbioOption && !proverbio)) {
-                                    fprintf(f,"“");
-                                }
-                            }
+#line 58 "src/pratico.flex"
+{BEGIN(0);}
 	YY_BREAK
+
+
 case 4:
 YY_RULE_SETUP
-#line 29 "src/pratico.flex"
-{
-                                BEGIN(PROVERBIO);
-                                proverbio = 1;
-                            }
+#line 63 "src/pratico.flex"
+{}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 33 "src/pratico.flex"
-{BEGIN(PAGE);}
+#line 64 "src/pratico.flex"
+{
+                    title[titleidx++] = yytext[0];
+                }
 	YY_BREAK
 case 6:
-/* rule 6 can match eol */
 YY_RULE_SETUP
-#line 34 "src/pratico.flex"
+#line 67 "src/pratico.flex"
 {
-                                                                            BEGIN(AUTOR);
-                                                                            autorIndex = 0;
-                                                                        }
+                    title[titleidx]='\0';
+                    if(!strncmp("Provérbios", title, strlen("Provérbios"))){
+                        fprintf(p,"PROVERBIOS :%s: \n\n",title);
+                        BEGIN(PROBPAGE);
+                        proverbio=1;
+                        adults = 0;
+                    }
+                    else{
+                        BEGIN(QUOTEPAGE);
+                    }
+                }
 	YY_BREAK
+
+
 case 7:
-/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 38 "src/pratico.flex"
-{
-                                BEGIN(PAGE);
-                                autor[autorIndex] = 0;
-                            }
+#line 82 "src/pratico.flex"
+{}                                                              
 	YY_BREAK
 case 8:
+/* rule 8 can match eol */
 YY_RULE_SETUP
-#line 42 "src/pratico.flex"
+#line 83 "src/pratico.flex"
 {
-                                autor[autorIndex++] = yytext[0];
+                                BEGIN(QUOTEPAGE);
+                                autor[autorIndex] = 0;
+                                autorIndex = 0;
                             }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 45 "src/pratico.flex"
-{BEGIN(LINK);}
+#line 88 "src/pratico.flex"
+{
+                                autor[autorIndex++] = '\"';
+}                            
 	YY_BREAK
 case 10:
-/* rule 10 can match eol */
 YY_RULE_SETUP
-#line 46 "src/pratico.flex"
+#line 91 "src/pratico.flex"
 {
-                                BEGIN(PAGE);
-                                if(!(proverbioOption && !proverbio)) {
-                                    if(autor[0]) {
-                                        fprintf(f, "” - %s\n", autor);
-                                    } else {
-                                        fprintf(f, "”\n");
-                                    }
-                                }
+                                autor[autorIndex++] = yytext[0];
                             }
 	YY_BREAK
+
+
 case 11:
-/* rule 11 can match eol */
 YY_RULE_SETUP
-#line 56 "src/pratico.flex"
+#line 97 "src/pratico.flex"
 {
-                                if(!(proverbioOption && !proverbio)) {
-                                    fprintf(f, "%s", yytext);
-                                }
-                            }
+                    BEGIN(AUTOR);
+                }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 61 "src/pratico.flex"
-{BEGIN(QUOTE);}
+#line 101 "src/pratico.flex"
+{ if(!autorIndex) BEGIN(AUTOR); }
 	YY_BREAK
 case 13:
-/* rule 13 can match eol */
 YY_RULE_SETUP
-#line 62 "src/pratico.flex"
+#line 103 "src/pratico.flex"
 {
-                                if(!(proverbioOption && !proverbio)) {
-                                    fprintf(f, "%s", yytext);
-                                }
+                            BEGIN(QUOTE);
+                            if(!(proverbioOption && !proverbio)) {
+                                fprintf(q,"“");
                             }
+                        }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 67 "src/pratico.flex"
-{BEGIN(QUOTE);}
+#line 109 "src/pratico.flex"
+{
+                BEGIN(0);
+                if(probs || quotes){
+                    fprintf(qstats,"Article:\"%s\"\n",title);
+                    if(autor[0])
+                        fprintf(qstats,"\tAuthor: %s\n",autor);
+                    if(quotes)
+                        fprintf(qstats,"\tnº quotes:%d\n",quotes);
+                    goThrough(qstats);
+                }
+            }
 	YY_BREAK
+
+
 case 15:
-/* rule 15 can match eol */
 YY_RULE_SETUP
-#line 69 "src/pratico.flex"
+#line 124 "src/pratico.flex"
 {}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 70 "src/pratico.flex"
+#line 125 "src/pratico.flex"
+{}
+	YY_BREAK
+case 17:
+YY_RULE_SETUP
+#line 126 "src/pratico.flex"
+{}
+	YY_BREAK
+case 18:
+/* rule 18 can match eol */
+YY_RULE_SETUP
+#line 127 "src/pratico.flex"
+{
+                                BEGIN(QUOTEPAGE);
+                                if(autor[0]) {
+                                    fprintf(q, "” - %s\n", autor);
+                                } else {
+                                    fprintf(q, "”\n");
+                                }
+                                quotes++;
+                                if (wordsize>0){
+                                    word[wordsize]=0;
+                                    addword(word);
+                                    wordsize = 0;
+                                }
+                            }
+	YY_BREAK
+case 19:
+YY_RULE_SETUP
+#line 142 "src/pratico.flex"
+{
+                        if (wordsize>0){
+                            word[wordsize]=0;
+                            wordsize = 0;
+                            //addword(word);
+                        }
+                        fprintf(q, "%s", yytext);
+                    }
+	YY_BREAK
+case 20:
+YY_RULE_SETUP
+#line 151 "src/pratico.flex"
+{
+                        if(yytext[0]!='\n')
+                            word[wordsize++] = yytext[0]; 
+                        fprintf(q, "%s", yytext);
+                     }
+	YY_BREAK
+case 21:
+YY_RULE_SETUP
+#line 156 "src/pratico.flex"
+{
+                        fprintf(q, "\"");
+                    }
+	YY_BREAK
+case 22:
+YY_RULE_SETUP
+#line 159 "src/pratico.flex"
+{ BEGIN(LINK); }
+	YY_BREAK
+
+
+case 23:
+YY_RULE_SETUP
+#line 163 "src/pratico.flex"
+{
+                        BEGIN(QUOTE);
+                    }
+	YY_BREAK
+case 24:
+YY_RULE_SETUP
+#line 166 "src/pratico.flex"
+{
+                        fprintf(q, "%s", yytext);
+                    }
+	YY_BREAK
+case 25:
+/* rule 25 can match eol */
+YY_RULE_SETUP
+#line 169 "src/pratico.flex"
+{}
+	YY_BREAK
+
+
+case 26:
+YY_RULE_SETUP
+#line 174 "src/pratico.flex"
+{
+                            probs++;
+                            BEGIN(PROVERBIO);
+}
+	YY_BREAK
+case 27:
+/* rule 27 can match eol */
+YY_RULE_SETUP
+#line 178 "src/pratico.flex"
+{
+        BEGIN(PROBOPTIONALS);
+        fprintf(p,"\nAdulteraçoes:\n\t\t");
+}
+	YY_BREAK
+case 28:
+YY_RULE_SETUP
+#line 182 "src/pratico.flex"
+{}
+	YY_BREAK
+case 29:
+YY_RULE_SETUP
+#line 183 "src/pratico.flex"
+{
+            BEGIN(0);
+            if(probs || quotes){
+                    fprintf(pstats,"Article:\"%s\"\n",title);
+                    if(probs)
+                        fprintf(pstats,"\tnº probs:%d\n",probs);
+                    if(adults)
+                        fprintf(pstats,"\tAdulteraçoes %d\n",adults);
+                    goThrough(pstats);
+            }
+}
+	YY_BREAK
+
+
+case 30:
+/* rule 30 can match eol */
+YY_RULE_SETUP
+#line 197 "src/pratico.flex"
+{                            BEGIN(PROBPAGE);
+                                if (wordsize>0){
+                                    word[wordsize]=0;
+                                    addword(word);
+                                    wordsize = 0;
+                                }
+        }
+	YY_BREAK
+case 31:
+YY_RULE_SETUP
+#line 204 "src/pratico.flex"
+{}
+	YY_BREAK
+case 32:
+YY_RULE_SETUP
+#line 205 "src/pratico.flex"
+{
+                        if (wordsize>1){
+                            word[wordsize]=0;
+                            addword(word);
+                            wordsize = 0;
+                        }
+                        fprintf(p, "%s", yytext);
+                    }
+	YY_BREAK
+case 33:
+YY_RULE_SETUP
+#line 213 "src/pratico.flex"
+{
+    if(yytext[0]!='\n')
+        word[wordsize++] = yytext[0]; 
+    fprintf(p,"%s",yytext);
+  }
+	YY_BREAK
+
+
+case 34:
+/* rule 34 can match eol */
+*yy_cp = (yy_hold_char); /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+(yy_c_buf_p) = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 222 "src/pratico.flex"
+{fprintf(p,"%s",yytext);
+          BEGIN(PROBPAGE);
+         }
+	YY_BREAK
+case 35:
+/* rule 35 can match eol */
+YY_RULE_SETUP
+#line 226 "src/pratico.flex"
+{fprintf(p,"\n\t\t");}
+	YY_BREAK
+case 36:
+YY_RULE_SETUP
+#line 227 "src/pratico.flex"
+{adults++;}
+	YY_BREAK
+case 37:
+YY_RULE_SETUP
+#line 228 "src/pratico.flex"
+{}
+	YY_BREAK
+case 38:
+YY_RULE_SETUP
+#line 229 "src/pratico.flex"
+{fprintf(p,"%s",yytext);}
+	YY_BREAK
+
+case 39:
+/* rule 39 can match eol */
+YY_RULE_SETUP
+#line 233 "src/pratico.flex"
+{}
+	YY_BREAK
+case 40:
+YY_RULE_SETUP
+#line 234 "src/pratico.flex"
 ECHO;
 	YY_BREAK
-#line 981 "out/lex.yy.c"
+#line 1330 "out/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(PAGE):
 case YY_STATE_EOF(QUOTE):
-case YY_STATE_EOF(LINK):
 case YY_STATE_EOF(AUTOR):
 case YY_STATE_EOF(PROVERBIO):
+case YY_STATE_EOF(TITLE):
+case YY_STATE_EOF(QUOTEPAGE):
+case YY_STATE_EOF(PROBPAGE):
+case YY_STATE_EOF(PROBOPTIONALS):
+case YY_STATE_EOF(LINK):
 	yyterminate();
 
 	case YY_END_OF_BUFFER:
@@ -1279,7 +1632,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 131 )
+			if ( yy_current_state >= 231 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1307,11 +1660,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 131 )
+		if ( yy_current_state >= 231 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 130);
+	yy_is_jam = (yy_current_state == 230);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2009,30 +2362,41 @@ int main ()
 	return 0;
 }
 
-#line 70 "src/pratico.flex"
+#line 234 "src/pratico.flex"
 
 
-/*
-int main(int argc, char* argv[]){
-    char* option = 0;
-    f = stdout; // Print in stdout by default
-    yyin = stdin; // Read from stdin by default
-    for(int i = 1; i < argc; i++) {
-        if(argv[i][0] == '-'){
-            option = &(argv[i][1]);
-            continue;
-        }
-        if(strcmp(option, "o") != 0) {
-            f = fopen (argv[i] , "w");
-            printf("W:%s\n",argv[i]);
-            continue;
-        } else if(strcmp(option, "p") != 0) {
-            proverbioOption = 1;
-        }
-        printf("R:%s\n",argv[i]);
-        yyin = fopen(argv[i], "r");
+
+void addword(char *w){
+    if (w[0]=='\0'|| w[0]=='\n') return;
+    int size = strlen(w);
+    if (w[size-1]=='\v') w[size-1]='\n';
+    if(!g_hash_table_contains (words,w))
+        g_hash_table_insert (words,strdup(w),(gpointer)1);
+    else{
+        int z = (long int) g_hash_table_lookup (words,w);
+        g_hash_table_insert (words,strdup(w),(gpointer)(long)(z+1));
     }
-    yylex();
-    return 0;
 }
-*/
+
+void goThrough(FILE* w){
+    GHashTableIter iter;
+    gpointer key, value;
+    g_hash_table_iter_init (&iter, words);
+    int num = 0; char* wordMax;
+    int total = 0;
+    while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+        // do something with key and value
+        if(key!=NULL){
+            total+=(long int)value;
+        }
+        if(key!= NULL && (long int)value>num){
+           num = (long int)value; 
+           wordMax = (char*)key;
+        }
+    }
+    if (num!=0)
+        fprintf(w,"\tPalavra mais comum: \'%s\' aparece %d vezes\n\tNumero total de palavras: %d \n",wordMax,num,g_hash_table_size(words));
+    g_hash_table_remove_all (words);
+}
+
